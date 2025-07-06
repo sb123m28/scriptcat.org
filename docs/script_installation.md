@@ -1,7 +1,25 @@
 # 脚本安装
+// ==UserScript==
+// @name Auto Dark Mode
+// @namespace http://scriptcat.org
+// @version 1.0
+// @description Automatically enable dark mode on websites
+// @author ScriptCat User
+// @match *://*/*
+// ==/UserScript==
 
-此页面用作在 `脚本猫` 中安装新用户脚本的中间步骤。
+function enableDarkMode() {
+const css = `body { background-color: #121212; color: #e0e0e0; }`;
+const style = document.createElement('style');
+style.textContent = css;
+document.head.appendChild(style);
+console.log('🐱 ScriptCat: Dark mode enabled');
+}
 
-安装完成后，该页面应自动关闭或重定向。
+function isDarkModePreferred() {
+return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
 
-此页面不适合直接查看，如有需要请访问[安装脚本](/docs/use/script_installation/)。
+if (isDarkModePreferred()) {
+enableDarkMode();
+}
